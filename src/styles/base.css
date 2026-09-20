@@ -1,0 +1,419 @@
+/* ============================================================
+   Skyline Doors — design tokens & base
+   Palette sampled directly from the approved design mockup.
+   ============================================================ */
+
+:root {
+  /* Navy — hero, CTA band, footer */
+  --navy-900: #050f18;
+  --navy-850: #081722;
+  --navy-800: #0a1e2c;
+  --navy-750: #0e2233;
+  --navy-700: #152636;
+  --navy-600: #1b2e40;
+  --navy-500: #2a3f54;
+
+  /* Copper — the single accent */
+  --copper: #a36546;
+  --copper-hi: #b97551;
+  --copper-soft: #c98f6c;
+  --copper-pale: #e5c9b5;
+
+  /* Light grounds */
+  --ivory: #fdfbf7;
+  --cream: #f7f4ec;
+  --sage: #d1d5cc;
+  --sand: #eae0d5;
+
+  /* Ink */
+  --ink: #081722;
+  --ink-70: rgba(8, 23, 34, 0.7);
+  --ink-55: rgba(8, 23, 34, 0.55);
+  --ink-35: rgba(8, 23, 34, 0.35);
+  --ink-12: rgba(8, 23, 34, 0.12);
+
+  /* On-navy */
+  --paper: #f4f1ea;
+  --paper-70: rgba(244, 241, 234, 0.7);
+  --paper-55: rgba(244, 241, 234, 0.55);
+  --paper-18: rgba(244, 241, 234, 0.18);
+  --paper-10: rgba(244, 241, 234, 0.1);
+
+  --font-display: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --gutter: clamp(20px, 5vw, 80px);
+  --maxw: 1400px;
+  --section-y: clamp(72px, 10vw, 150px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-door: cubic-bezier(0.65, 0, 0.2, 1);
+
+  --radius: 2px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.intro-locked {
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+::selection {
+  background: var(--copper);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper-hi);
+  outline-offset: 3px;
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.section--ivory {
+  background: var(--ivory);
+}
+.section--cream {
+  background: var(--cream);
+}
+.section--sage {
+  background: var(--sage);
+}
+.section--navy {
+  background: var(--navy-800);
+  color: var(--paper);
+}
+
+/* ---------- Typography ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+}
+.eyebrow::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--copper);
+}
+.eyebrow--plain::before {
+  display: none;
+}
+.on-navy .eyebrow,
+.section--navy .eyebrow {
+  color: var(--paper-55);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.section--navy .display,
+.on-navy .display {
+  color: var(--paper);
+}
+
+/* Minimums are tuned so the longest headline on each page still fits a
+   375px viewport on one line, inside the reveal mask. */
+.display--xl {
+  font-size: clamp(2.3rem, 8.2vw, 6.4rem);
+}
+.display--lg {
+  font-size: clamp(1.95rem, 4.6vw, 4rem);
+}
+.display--md {
+  font-size: clamp(1.75rem, 3.2vw, 2.7rem);
+}
+.display--sm {
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  line-height: 1.16;
+}
+
+.display em {
+  font-style: normal;
+  color: var(--copper);
+}
+.section--navy .display em {
+  color: var(--copper-soft);
+}
+
+.lead {
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  line-height: 1.75;
+  color: var(--ink-70);
+  max-width: 54ch;
+}
+.section--navy .lead,
+.on-navy .lead {
+  color: var(--paper-70);
+}
+
+.body-text {
+  color: var(--ink-70);
+  max-width: 62ch;
+}
+.body-text + .body-text {
+  margin-top: 1.1em;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 26px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.45s var(--ease-out), border-color 0.45s var(--ease-out);
+}
+
+.btn__arrow {
+  display: inline-block;
+  transition: transform 0.45s var(--ease-out);
+}
+.btn:hover .btn__arrow {
+  transform: translateX(5px);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s var(--ease-out);
+}
+.btn:hover::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Solid copper */
+.btn--primary {
+  background: var(--copper);
+  color: #fff;
+}
+.btn--primary::before {
+  background: var(--navy-800);
+}
+.section--navy .btn--primary::before,
+.on-navy .btn--primary::before {
+  background: var(--paper);
+}
+.section--navy .btn--primary:hover,
+.on-navy .btn--primary:hover {
+  color: var(--navy-800);
+}
+
+/* Outline */
+.btn--ghost {
+  border: 1px solid var(--ink-12);
+  color: var(--ink);
+}
+.btn--ghost::before {
+  background: var(--ink);
+}
+.btn--ghost:hover {
+  color: var(--ivory);
+  border-color: var(--ink);
+}
+.on-navy .btn--ghost,
+.section--navy .btn--ghost {
+  border-color: var(--paper-18);
+  color: var(--paper);
+}
+.on-navy .btn--ghost::before,
+.section--navy .btn--ghost::before {
+  background: var(--paper);
+}
+.on-navy .btn--ghost:hover,
+.section--navy .btn--ghost:hover {
+  color: var(--navy-850);
+  border-color: var(--paper);
+}
+
+/* Underlined text link */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  position: relative;
+  color: inherit;
+}
+.link-arrow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--copper);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease-out);
+}
+.link-arrow:hover::after {
+  transform: scaleX(0);
+}
+.link-arrow svg,
+.link-arrow .btn__arrow {
+  transition: transform 0.45s var(--ease-out);
+}
+.link-arrow:hover .btn__arrow {
+  transform: translateX(6px);
+}
+
+/* ---------- Reveal + parallax primitives ---------- */
+
+/* Masks the line for the slide-up reveal. The padding/margin pair gives
+   serif descenders room so they are not sheared off by the clip. */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+
+.parallax-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-700);
+}
+/* The image may sit inside a motion wrapper, so match at any depth. */
+.parallax-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.parallax-frame > div {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+.rule {
+  height: 1px;
+  background: var(--ink-12);
+  border: 0;
+  margin: 0;
+}
+.section--navy .rule,
+.on-navy .rule {
+  background: var(--paper-10);
+}
+
+.accent-bar {
+  width: 3px;
+  background: var(--copper);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
